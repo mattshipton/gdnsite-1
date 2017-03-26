@@ -1,6 +1,7 @@
 "use strict";
 
 const config = require("../config.json");
+const db = require("../helpers/db");
 
 let user = null;
 
@@ -13,6 +14,13 @@ module.exports.index = function* index() {
 		user: user
 	});
 };
+
+module.exports.success = function* success() {
+	yield this.render("success", {
+		title: config.site.name,
+		user: user
+	});
+}
 
 module.exports.join = function* join() {
 	this.redirect("https://discord.gg/sWsrrJQ")
@@ -41,11 +49,14 @@ module.exports.gamejam = function* gamejam() {
 module.exports.vote = function* vote() {
 	if (this.isAuthenticated()) {
 		user = this.session.passport.user;
-	} else {
-		throw new Error("You must sign in before voting!");
-	}
+	} 
+	// else {
+	// 	throw new Error("You must sign in before voting!");
+	// }
+	const data = yield db.runView("themes/all", null, "themes");
 	yield this.render("vote", {
 		title: config.site.name,
-		user: user
+		user: user,
+		themes: data
 	});
 }

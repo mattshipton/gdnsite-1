@@ -1,8 +1,20 @@
 <div class="container">
 
 	<div class="starter-template">
+		<div class="text-center">
 		<h1>{{get_name}}</h1>
-		<p class="lead">Our current/past gamejams!</p>
+		<p class="lead">Vote for your favorite Gam Jam theme or submit a new theme!</p><br>
+		<div class="row">
+			<form action="/themes" method="post">
+				<input type="text" placeholder="Gam jam theme" name="theme_name"/>  
+				<input type="submit" value="Submit"/>
+			</form>
+		</div>
+		</div>
+		<hr>
+		{{#each themes}}
+			<div>{{this}}</div>
+		{{/each}}
 	</div>
 
 </div><!-- /.container -->
