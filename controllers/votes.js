@@ -3,7 +3,7 @@
 const db = require("../helpers/db");
 const themeModel = require("../models/theme");
 
-let user;
+let user = null;
 
 module.exports.upvote = function* upvote() {
     if(this.params.id === null) {
