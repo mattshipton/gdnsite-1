@@ -11,7 +11,7 @@
 git clone https://github.com/cynical89/gdnsite.git
 ```
 
-* If yarn you can get it [here](https://yarnpkg.com/en/docs/install), or
+* If you don't have yarn you can get it [here](https://yarnpkg.com/en/docs/install), or
 ```
 npm install -g yarn
 ```
