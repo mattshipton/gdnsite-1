@@ -12,7 +12,7 @@ passport.deserializeUser((user, done) => {
 	done(null, user);
 });
 
-const scopes = ['identify', 'email', 'guilds', 'guilds.join'];
+const scopes = ['identify', 'email', 'guilds'];
 
 const DiscordStrategy = require("passport-discord").Strategy;
 // if we have a port other than 80, add it to our callback url
