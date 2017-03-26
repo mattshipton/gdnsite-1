@@ -1,4 +1,4 @@
-# Game Developer Network website!
+# Game Developer Network website! [![Build Status](https://travis-ci.org/cynical89/gdnsite.svg?branch=master)](https://travis-ci.org/cynical89/gdnsite) [![Coverage Status](https://coveralls.io/repos/github/cynical89/gdnsite/badge.svg?branch=master)](https://coveralls.io/github/cynical89/gdnsite?branch=master)
 
 ## Prerequisites
 * [Node.js](https://nodejs.org/en/) (Version 5 and up recommended)

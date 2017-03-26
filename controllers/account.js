@@ -12,7 +12,7 @@ module.exports.login = function* login() {
 	});
 };
 
-module.exports.logout = function* logout() {
+module.exports.logout = function logout() {
 	this.logout();
 	this.redirect("/");
 };
