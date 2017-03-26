@@ -12,16 +12,19 @@ passport.deserializeUser((user, done) => {
 	done(null, user);
 });
 
-const GithubStrategy = require("passport-github").Strategy;
+const scopes = ['identify', 'email', 'guilds', 'guilds.join'];
+
+const DiscordStrategy = require("passport-discord").Strategy;
 // if we have a port other than 80, add it to our callback url
 let port = "";
 if (config.site.port !== 80) {
 	port = `:${config.site.port}`;
 }
-passport.use(new GithubStrategy({
-	clientID: config.site.oauth.github.clientID,
-	clientSecret: config.site.oauth.github.clientSecret,
-	callbackURL: `${config.site.oauth.host}${port}/auth/github/callback`
+passport.use(new DiscordStrategy({
+	clientID: config.site.oauth.discord.clientID,
+	clientSecret: config.site.oauth.discord.clientSecret,
+	callbackURL: `${config.site.oauth.host}${port}/auth/discord/callback`,
+	scope: scopes
 }, (token, tokenSecret, profile, done) => {
 	// retrieve user ...
 	co(function* auth() {

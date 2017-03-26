@@ -14,8 +14,8 @@ module.exports.login = function* login() {
 };
 
 module.exports.logout = function* logout() {
-	this.logout();
-	yield this.redirect("/");
+	yield this.logout();
+	this.redirect("/");
 };
 
 module.exports.index = function* index() {

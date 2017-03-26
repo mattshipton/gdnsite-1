@@ -8,6 +8,7 @@ const serve = require("koa-static-folder");
 
 // for passport support
 const session = require("koa-generic-session");
+const redis = require("koa-redis");
 const bodyParser = require("koa-bodyparser");
 const passport = require("koa-passport");
 
@@ -27,7 +28,14 @@ app.proxy = true;
 
 // sessions
 app.keys = [config.site.secret];
-app.use(session());
+if (process.env.NODE_ENV === "production") {
+	app.use(session({
+		cookie: {maxAge: 1000 * 60 * 60 * 24},
+    	store : redis()
+	}));
+} else {
+	app.use(session());
+}
 
 // body parser
 app.use(bodyParser());
@@ -52,9 +60,10 @@ app.use(function* error(next) {
 	try {
 		yield next;
 	} catch (err) {
-		this.status = err.status || 500;
-		this.body = err.message;
 		this.app.emit("error", err, this);
+		yield this.render("error", {
+			dump: err
+		});
 	}
 });
 
