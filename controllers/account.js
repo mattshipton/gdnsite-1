@@ -15,7 +15,7 @@ module.exports.login = function* login() {
 
 module.exports.logout = function* logout() {
 	this.logout();
-	this.session.destroy();
+	this.session = null;
 	this.redirect("/");
 };
 
