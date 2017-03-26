@@ -3,9 +3,8 @@
 const db = require("../helpers/db");
 const themeModel = require("../models/theme");
 
-let user = null;
-
 module.exports.upvote = function* upvote() {
+    let user = null;
     if(this.params.id === null) {
         throw new Error("Missing parameters!");
     }

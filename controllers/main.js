@@ -3,9 +3,8 @@
 const config = require("../config.json");
 const db = require("../helpers/db");
 
-let user = null;
-
 module.exports.index = function* index() {
+	let user = null;
 	if (this.isAuthenticated()) {
 		user = this.session.passport.user;
 	}
@@ -27,6 +26,7 @@ module.exports.join = function* join() {
 }
 
 module.exports.jam = function* jam() {
+	let user = null;
 	if (this.isAuthenticated()) {
 		user = this.session.passport.user;
 	}
@@ -37,6 +37,7 @@ module.exports.jam = function* jam() {
 }
 
 module.exports.gamejam = function* gamejam() {
+	let user = null;
 	if (this.isAuthenticated()) {
 		user = this.session.passport.user;
 	}
@@ -47,6 +48,7 @@ module.exports.gamejam = function* gamejam() {
 }
 
 module.exports.vote = function* vote() {
+	let user = null;
 	if (this.isAuthenticated()) {
 		user = this.session.passport.user;
 	}

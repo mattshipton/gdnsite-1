@@ -2,9 +2,8 @@
 
 const config = require("../config.json");
 
-let user = null;
-
 module.exports.login = function* login() {
+	let user = null;
 	if (this.isAuthenticated()) {
 		user = this.session.passport.user;
 	}
@@ -15,11 +14,11 @@ module.exports.login = function* login() {
 
 module.exports.logout = function* logout() {
 	this.logout();
-	user = null;
 	this.redirect("/");
 };
 
 module.exports.index = function* index() {
+	let user = null;
 	if (this.isAuthenticated()) {
 		user = this.session.passport.user;
 	} else {
