@@ -2,6 +2,7 @@
 
 const config = require("../config.json");
 const db = require("../helpers/db");
+const common = require("../helpers/common");
 
 module.exports.index = function* index() {
 	let user = null;
@@ -51,7 +52,8 @@ module.exports.vote = function* vote() {
 	if (this.isAuthenticated()) {
 		user = this.session.passport.user;
 	}
-	const data = yield db.runView("themes/all", null, "themes");
+	let data = yield db.runView("themes/all", null, "themes");
+	data = common.sortbyVotes(data.results);
 	yield this.render("vote", {
 		title: config.site.name,
 		user: user,
