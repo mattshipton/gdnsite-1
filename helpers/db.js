@@ -94,7 +94,7 @@ exports.runView = function* runView(path, key, database) {
 	} catch (err) {
 		return {
 			error: true,
-			message: `DB: View of [${path}] failed`
+			message: err
 		};
 	}
 };

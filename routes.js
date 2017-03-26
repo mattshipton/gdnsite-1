@@ -21,8 +21,7 @@ routes.get("/gamejam/:id", main.gamejam);
 
 routes.get("/vote", main.vote);
 routes.post("/themes", vote.themes);
-routes.get("/votes/:id");
-routes.post("/votes/:id");
+routes.get("/votes/:id", vote.upvote);
 
 // for passport
 routes.get("/login", account.login);

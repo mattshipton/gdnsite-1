@@ -49,10 +49,7 @@ module.exports.gamejam = function* gamejam() {
 module.exports.vote = function* vote() {
 	if (this.isAuthenticated()) {
 		user = this.session.passport.user;
-	} 
-	// else {
-	// 	throw new Error("You must sign in before voting!");
-	// }
+	}
 	const data = yield db.runView("themes/all", null, "themes");
 	yield this.render("vote", {
 		title: config.site.name,

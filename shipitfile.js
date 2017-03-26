@@ -26,6 +26,16 @@ module.exports = function (shipit) {
 		return shipit.remote(`${pathStr} && cd ${currentPath} && npm install &> /dev/null`);
 	});
 
+	// this task restarts the service with pm2
+	shipit.blTask("pm2-restart", function () {
+		return shipit.remote(`${pathStr} && pm2 restart gdnsite`);
+	});
+
+	// this task creates the service with pm2
+	shipit.blTask("pm2-create", function () {
+		return shipit.remote(`${pathStr} && if pm2 status | grep "gdnsite" | grep -v grep; then break; else ${pathStr} && cd ${currentPath} && pm2 start npm --name 'gdnsite' -- run prod; fi;`);
+	});
+
 	// this task starts the server in a screen with a name set in the config
 	shipit.blTask("start_screen", function () {
 		return shipit.remote(`${pathStr} && cd ${currentPath} && screen -S ${config.deploy.screen} -d -m npm start`);
@@ -53,7 +63,8 @@ module.exports = function (shipit) {
 
 	shipit.on("deployed", function () {
 		// this series of tasks will result in a good deploy assuming everything is \working
-		shipit.start( "kill_screen", "install", "install_local_config", "start_screen");
+		shipit.start( "pm2-create", "install", "install_local_config", "pm2-restart");
+		//shipit.start( "kill_screen", "install", "install_local_config", "start_screen");
 		// if you"re having problems with the deploy being successful, but not actually starting the server, try this:
 		//shipit.start("kill_screen", "install", "install_local_config", "start_session");
 	});

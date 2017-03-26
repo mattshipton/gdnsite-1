@@ -10,11 +10,35 @@
 				<input type="submit" value="Submit"/>
 			</form>
 		</div>
+		<hr>
+		<div class="row">
+			<div class="col-xs-4">
+				<h4><strong><u>Theme name</u></strong></h4>
+			</div>
+			<div class="col-xs-4">
+				<h4><strong>Number of Votes</strong></h4>
+			</div>
+			<div class="col-xs-4">
+				<h4><strong>Vote Link</a></h4>
+			</div>
 		</div>
 		<hr>
 		{{#each themes}}
-			<div>{{this}}</div>
+			{{#each this}}
+				<div class="row">
+					<div class="col-xs-4">
+						<h4><strong><u>{{this.value.name}}</u></strong></h4>
+					</div>
+					<div class="col-xs-4">
+						<h4><strong>{{this.value.votes}}</strong></h4>
+					</div>
+					<div class="col-xs-4">
+						<h4><strong><a href="/votes/{{this.id}}"><i class="text-danger fa fa-heart"></i></a></h4>
+					</div>
+				</div>
+			{{/each}}
 		{{/each}}
+	</div>
 	</div>
 
 </div><!-- /.container -->

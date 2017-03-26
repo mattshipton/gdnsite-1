@@ -11,7 +11,7 @@ module.exports = {
         return theme;
     },
     addVote: (theme, voter) => {
-        theme.votes += 1;
+        theme.votes++;
         theme.voters.push(voter);
         return theme;
     }
