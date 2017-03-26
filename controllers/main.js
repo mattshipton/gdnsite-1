@@ -16,8 +16,7 @@ module.exports.index = function* index() {
 
 module.exports.success = function* success() {
 	yield this.render("success", {
-		title: config.site.name,
-		user: user
+		title: config.site.name
 	});
 }
 
