@@ -12,9 +12,9 @@ module.exports.upvote = function* upvote() {
     if (this.isAuthenticated()) {
         user = this.session.passport.user;
     }
-    // if (this.isUnauthenticated()) {
-    //     throw new Error("You must be authenticated to perform this action!");
-    // }
+    if (this.isUnauthenticated()) {
+        throw new Error("You must be authenticated to perform this action!");
+    }
     let theme = yield db.getDocument(this.params.id, "themes");
     if(~theme.voters.indexOf(`${user.username}#${user.discriminator}`)) {
         return this.redirect("/vote");
