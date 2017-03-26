@@ -12,6 +12,9 @@ const redis = require("koa-redis");
 const bodyParser = require("koa-bodyparser");
 const passport = require("koa-passport");
 
+const db = require("./helpers/db");
+const errModel = require("./models/error");
+
 const app = koa();
 
 exports.app = app;
@@ -60,9 +63,20 @@ app.use(function* error(next) {
 	try {
 		yield next;
 	} catch (err) {
+		let user = null;
+		if (this.isAuthenticated()) {
+			user = this.session.passport.user;
+		} else {
+			user = {
+				username: "anonymous",
+				discriminator: "0000"
+			};
+		}
+		let e = errModel.newError(err.toString(), `${user.username}#${user.discriminator}`)
+		e = yield db.saveDocument(e, "errors");
 		this.app.emit("error", err, this);
 		yield this.render("error", {
-			dump: err
+			dump: e
 		});
 	}
 });
