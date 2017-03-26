@@ -16,14 +16,17 @@ const scopes = ['identify', 'email', 'guilds'];
 
 const DiscordStrategy = require("passport-discord").Strategy;
 // if we have a port other than 80, add it to our callback url
-let port = "";
-if (config.site.port !== 80) {
-	port = `:${config.site.port}`;
+let callback = "";
+if(process.env.NODE_ENV === "production") {
+	callback = `${config.site.oauth.host}/auth/discord/callback`;
+} else {
+	callback = `${config.site.oauth.host}${port}/auth/discord/callback`;
 }
+
 passport.use(new DiscordStrategy({
 	clientID: config.site.oauth.discord.clientID,
 	clientSecret: config.site.oauth.discord.clientSecret,
-	callbackURL: `${config.site.oauth.host}${port}/auth/discord/callback`,
+	callbackURL: callback,
 	scope: scopes
 }, (token, tokenSecret, profile, done) => {
 	// retrieve user ...
