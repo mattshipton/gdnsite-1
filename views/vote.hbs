@@ -25,7 +25,6 @@
 		</div>
 		<hr>
 		{{#each themes}}
-			{{#each this}}
 				<div class="row">
 					<div class="col-xs-4">
 						<h4><strong><u>{{this.value.name}}</u></strong></h4>
@@ -37,7 +36,6 @@
 						<h4><strong><a href="/votes/{{this.id}}"><i class="text-danger fa fa-heart"></i></a></h4>
 					</div>
 				</div>
-			{{/each}}
 		{{/each}}
 	</div>
 	</div>

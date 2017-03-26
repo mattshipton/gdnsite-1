@@ -20,7 +20,7 @@ let callback = "";
 if(process.env.NODE_ENV === "production") {
 	callback = `${config.site.oauth.host}/auth/discord/callback`;
 } else {
-	callback = `${config.site.oauth.host}${config.site.port}/auth/discord/callback`;
+	callback = `${config.site.oauth.host}:${config.site.port}/auth/discord/callback`;
 }
 
 passport.use(new DiscordStrategy({
