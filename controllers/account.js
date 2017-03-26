@@ -15,7 +15,8 @@ module.exports.login = function* login() {
 
 module.exports.logout = function* logout() {
 	this.logout();
-	yield this.redirect("/");
+	this.session.destroy();
+	this.redirect("/");
 };
 
 module.exports.index = function* index() {
