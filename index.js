@@ -72,7 +72,7 @@ app.use(function* error(next) {
 				discriminator: "0000"
 			};
 		}
-		let e = errModel.newError(err.toString(), `${user.username}#${user.discriminator}`)
+		let e = errModel.newError(err.toString(), `${user.username}#${user.discriminator}`);
 		e = yield db.saveDocument(e, "errors");
 		this.app.emit("error", err, this);
 		yield this.render("error", {

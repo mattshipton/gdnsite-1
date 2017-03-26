@@ -19,11 +19,11 @@ module.exports.success = function* success() {
 	yield this.render("success", {
 		title: config.site.name
 	});
-}
+};
 
-module.exports.join = function* join() {
-	this.redirect("https://discord.gg/sWsrrJQ")
-}
+module.exports.join = function join() {
+	this.redirect("https://discord.gg/sWsrrJQ");
+};
 
 module.exports.jam = function* jam() {
 	let user = null;
@@ -34,7 +34,7 @@ module.exports.jam = function* jam() {
 		title: config.site.name,
 		user: user
 	});
-}
+};
 
 module.exports.gamejam = function* gamejam() {
 	let user = null;
@@ -45,7 +45,7 @@ module.exports.gamejam = function* gamejam() {
 		title: config.site.name,
 		user: user
 	});
-}
+};
 
 module.exports.vote = function* vote() {
 	let user = null;
@@ -59,4 +59,4 @@ module.exports.vote = function* vote() {
 		user: user,
 		themes: data
 	});
-}
+};
