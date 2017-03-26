@@ -42,7 +42,6 @@ module.exports.vote = function* vote() {
 	if (this.isAuthenticated()) {
 		user = this.session.passport.user;
 	} else {
-		this.status = 401;
 		throw new Error("You must sign in before voting!");
 	}
 	yield this.render("vote", {
