@@ -28,6 +28,7 @@
   "homepage": "https://github.com/cynical89/gdnsite#readme",
   "dependencies": {
     "bluebird": "^3.5.0",
+    "chance": "^1.0.6",
     "co": "^4.6.0",
     "cradle": "^0.7.1",
     "koa": "^1.1.2",
