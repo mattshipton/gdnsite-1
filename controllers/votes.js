@@ -12,7 +12,7 @@ module.exports.upvote = function* upvote() {
 		user = this.session.passport.user;
 	}
 	if (this.isUnauthenticated()) {
-		throw new Error("You must be authenticated to perform this action!");
+		this.redirect("/login");
 	}
 	let theme = yield db.getDocument(this.params.id, "themes");
 	if (~theme.voters.indexOf(`${user.username}#${user.discriminator}`)) {
@@ -30,7 +30,7 @@ module.exports.upvote = function* upvote() {
 module.exports.themes = function* themes() {
 	const params = this.request.body;
 	if (this.isUnauthenticated()) {
-		throw new Error("You must be authenticated to perform this action!");
+		this.redirect("/login");
 	}
 	if (!params.theme_name) {
 		throw new Error("You must supply a theme name!");

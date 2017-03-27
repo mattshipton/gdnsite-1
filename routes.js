@@ -11,6 +11,7 @@ const routes = new Router();
 const main = require("./controllers/main.js");
 const account = require("./controllers/account.js");
 const vote = require("./controllers/votes");
+const admin = require("./controllers/admin");
 
 // routes
 routes.get("/", main.index);
@@ -22,6 +23,8 @@ routes.get("/gamejam/:id", main.gamejam);
 routes.get("/vote", main.vote);
 routes.post("/themes", vote.themes);
 routes.get("/votes/:id", vote.upvote);
+
+routes.get("/admin", admin.index);
 
 // for passport
 routes.get("/login", account.login);

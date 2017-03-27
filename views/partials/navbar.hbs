@@ -17,6 +17,9 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				{{#if user}}
+				{{#if user.admin}}
+					<li><a href="/admin">Admin</a></li>
+				{{/if}}
 					<li><a href="/account">Account</a></li>
 					<li><a href="/logout">Logout</a></li>
 				{{else}}

@@ -7,7 +7,7 @@ const common = require("../helpers/common");
 module.exports.index = function* index() {
 	let user = null;
 	if (this.isAuthenticated()) {
-		user = this.session.passport.user;
+		user = common.getPermissions(this.session.passport.user);
 	}
 	yield this.render("index", {
 		title: config.site.name,
@@ -28,7 +28,7 @@ module.exports.join = function join() {
 module.exports.jam = function* jam() {
 	let user = null;
 	if (this.isAuthenticated()) {
-		user = this.session.passport.user;
+		user = common.getPermissions(this.session.passport.user);
 	}
 	yield this.render("jam", {
 		title: config.site.name,
@@ -39,7 +39,7 @@ module.exports.jam = function* jam() {
 module.exports.gamejam = function* gamejam() {
 	let user = null;
 	if (this.isAuthenticated()) {
-		user = this.session.passport.user;
+		user = common.getPermissions(this.session.passport.user);
 	}
 	yield this.render("gamejam", {
 		title: config.site.name,
@@ -50,7 +50,7 @@ module.exports.gamejam = function* gamejam() {
 module.exports.vote = function* vote() {
 	let user = null;
 	if (this.isAuthenticated()) {
-		user = this.session.passport.user;
+		user = common.getPermissions(this.session.passport.user);
 	}
 	let data = yield db.runView("themes/all", null, "themes");
 	data = common.sortbyVotes(data.results);

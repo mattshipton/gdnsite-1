@@ -1,11 +1,13 @@
 "use strict";
 
 const config = require("../config.json");
+const common = require("../helpers/common");
 
 module.exports.login = function* login() {
 	let user = null;
 	if (this.isAuthenticated()) {
-		user = this.session.passport.user;
+		user = common.getPermissions(this.session.passport.user);
+		console.log(user);
 	}
 	yield this.render("login", {
 		user: user
@@ -20,7 +22,7 @@ module.exports.logout = function logout() {
 module.exports.index = function* index() {
 	let user = null;
 	if (this.isAuthenticated()) {
-		user = this.session.passport.user;
+		user = common.getPermissions(this.session.passport.user);
 	} else {
 		return this.redirect("/");
 	}
