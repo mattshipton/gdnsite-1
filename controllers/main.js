@@ -52,8 +52,7 @@ module.exports.vote = function* vote() {
 	if (this.isAuthenticated()) {
 		user = common.getPermissions(this.session.passport.user);
 	}
-	let data = yield db.runView("themes/all", null, "themes");
-	data = common.sortbyVotes(data.results);
+	const data = yield db.runView("themes/all", null, "themes");
 	yield this.render("vote", {
 		title: config.site.name,
 		user: user,
