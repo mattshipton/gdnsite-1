@@ -56,6 +56,6 @@ module.exports.vote = function* vote() {
 	yield this.render("vote", {
 		title: config.site.name,
 		user: user,
-		themes: data
+		themes: data.results
 	});
 };
