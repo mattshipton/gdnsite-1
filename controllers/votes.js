@@ -19,7 +19,7 @@ module.exports.upvote = function* upvote() {
 		// theme = themeModel.removeVote(theme, `${user.username}#${user.discriminator}`);
 		// const result = yield db.saveDocument(theme, "themes");
 		// this.body = result;
-		return this.redirect("/vote");
+		return this.redirect("/voted");
 	}
 	theme = themeModel.addVote(theme, `${user.username}#${user.discriminator}`);
 	const result = yield db.saveDocument(theme, "themes");

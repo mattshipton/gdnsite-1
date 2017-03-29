@@ -16,14 +16,24 @@ module.exports.index = function* index() {
 };
 
 module.exports.success = function* success() {
+	let user = null;
+	if (this.isAuthenticated()) {
+		user = common.getPermissions(this.session.passport.user);
+	}
 	yield this.render("success", {
-		title: config.site.name
+		title: config.site.name,
+		user, user
 	});
 };
 
 module.exports.voted = function* voted() {
+	let user = null;
+	if (this.isAuthenticated()) {
+		user = common.getPermissions(this.session.passport.user);
+	}
 	yield this.render("voted", {
-		title: config.site.name
+		title: config.site.name,
+		user: user
 	});
 };
 
