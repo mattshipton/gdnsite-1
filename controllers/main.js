@@ -22,7 +22,7 @@ module.exports.success = function* success() {
 	}
 	yield this.render("success", {
 		title: config.site.name,
-		user, user
+		user: user
 	});
 };
 
