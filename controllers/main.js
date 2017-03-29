@@ -21,6 +21,12 @@ module.exports.success = function* success() {
 	});
 };
 
+module.exports.voted = function* voted() {
+	yield this.render("voted", {
+		title: config.site.name
+	});
+};
+
 module.exports.join = function join() {
 	this.redirect("https://discord.gg/sWsrrJQ");
 };

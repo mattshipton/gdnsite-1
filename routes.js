@@ -21,6 +21,7 @@ routes.get("/gamejam", main.jam);
 routes.get("/gamejam/:id", main.gamejam);
 
 routes.get("/vote", main.vote);
+routes.get("/voted", main.voted);
 routes.post("/themes", vote.themes);
 routes.get("/votes/:id", vote.upvote);
 
