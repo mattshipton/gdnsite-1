@@ -1,14 +1,14 @@
 {
   "site":{
     "port": 5000,
-    "name": "Game Developer Network",
+    "name": "Game Dev Network",
     "secret": "Get-your-game-on~!",
     "timezone": "America/Los_Angeles",
     "oauth": {
       "host": "http://127.0.0.1",
-      "github": {
-        "clientID": "OAUTH CLIENT ID FOR GITHUB",
-        "clientSecret": "OAUTH CLIENT SECRET FOR GITHUB"
+      "discord": {
+        "clientID": "OAUTH CLIENT ID FOR DISCORD",
+        "clientSecret": "OAUTH CLIENT SECRET FOR DISCORD"
       }
     },
     "analytics": "UA-00000000-0"

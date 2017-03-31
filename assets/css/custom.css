@@ -13,3 +13,6 @@ body {
 #alertmsg {
   font-size: 14px;
 }
+.text-default {
+	color: black !important;
+}

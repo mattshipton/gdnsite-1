@@ -16,15 +16,15 @@ module.exports.upvote = function* upvote() {
 	}
 	let theme = yield db.getDocument(this.params.id, "themes");
 	if (~theme.voters.indexOf(`${user.username}#${user.discriminator}`)) {
-		// theme = themeModel.removeVote(theme, `${user.username}#${user.discriminator}`);
-		// const result = yield db.saveDocument(theme, "themes");
-		// this.body = result;
-		return this.redirect("/voted");
+		theme = themeModel.removeVote(theme, `${user.username}#${user.discriminator}`);
+		const result = yield db.saveDocument(theme, "themes");
+		this.body = result;
+		return this.redirect("/vote");
 	}
 	theme = themeModel.addVote(theme, `${user.username}#${user.discriminator}`);
 	const result = yield db.saveDocument(theme, "themes");
 	this.body = result;
-	return this.redirect("/success");
+	return this.redirect("/vote");
 };
 
 module.exports.themes = function* themes() {

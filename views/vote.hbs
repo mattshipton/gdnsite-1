@@ -22,20 +22,37 @@
 				<h4><strong>Theme name</strong></h4>
 			</div>
 			<div class="col-xs-6">
-				<h4><strong>Vote Link</a></h4>
+				<h4><strong>Up/Down vote</a></h4>
 			</div>
 		</div>
 		<hr>
+		{{#if user}}
 		{{#each themes}}
 				<div class="row">
 					<div class="col-xs-6">
 						<h4><strong><u>{{this.value.name}}</u></strong></h4>
 					</div>
 					<div class="col-xs-6">
-						<h4><strong><a href="/votes/{{this.id}}"><i class="text-danger fa fa-heart"></i></a></h4>
+						{{#if this.canVote}}
+							<h4><strong><a class="text-danger" href="/votes/{{this.id}}"><i class="text-danger fa fa-heart"></i> Upvote</a></h4>
+						{{else}}
+							<h4><strong><a class="text-default" href="/votes/{{this.id}}"><i class="text-default fa fa-thumbs-o-down"></i> Downvote</a></strong></h4>
+						{{/if}}
 					</div>
 				</div>
 		{{/each}}
+		{{else}}
+		{{#each themes}}
+				<div class="row">
+					<div class="col-xs-6">
+						<h4><strong><u>{{this.value.name}}</u></strong></h4>
+					</div>
+					<div class="col-xs-6">
+							<h4><strong><a href="/login">Sign in to vote!</a></strong></h4>
+					</div>
+				</div>
+		{{/each}}
+		{{/if}}
 	</div>
 	</div>
 
