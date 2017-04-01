@@ -65,22 +65,20 @@ module.exports.gamejam = function* gamejam() {
 
 module.exports.vote = function* vote() {
 	let user = null;
-	const data = yield db.runView("themes/all", null, "themes");
-	let returnData = [];
+	let data = yield db.runView("themes/all", null, "themes");
+	const returnData = [];
 	if (this.isAuthenticated()) {
 		user = common.getPermissions(this.session.passport.user);
-		for (const item of data.results) {
-			if (item.value.voters.indexOf(`${user.username}#${user.discriminator}`) === -1) {
-				item.canVote = true;
-			}
-			returnData.push(item);
-		}
-	} else {
-		returnData = data.results;
+	}
+	data = common.sortbyVotes(data.results);
+	const winner = data[0];
+	for (let i = 0; i < 3; i++) {
+		returnData.push(data[i]);
 	}
 	yield this.render("vote", {
 		title: config.site.name,
 		user: user,
-		themes: returnData
+		themes: returnData,
+		winner: winner
 	});
 };
