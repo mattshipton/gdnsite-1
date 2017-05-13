@@ -3,18 +3,56 @@
 	<div class="starter-template">
 		<div class="text-center">
 		<h1>{{get_name}}</h1>
-		<p class="lead">Voting for themes is closed. Thank you all for participating!</p>
-		<p class="text-muted">*Remember, you have until April 9, 23:00 GMT to submit your games!</p>
-		<hr>
-		<h3> The winning theme is... </h3>
-		<p>{{winner.value.name}}</p>
+		<p class="lead">Vote for your favorite Gam Jam theme or submit a new theme!</p>
+		<p class="text-muted">*Remember, you only have until Friday March 31st 00:00 GMT to vote!</p>
+		{{#if user}}
 		<br>
-		<h4> The top 3 themes were... </h4>
+		{{else}}
+		<p class="text-danger"><strong><u>You must <a href="/login">sign in</a> before you can add a theme or vote.</u></strong></p><br>
+		{{/if}}
+		<div class="row">
+			<form action="/themes" method="post">
+				<input type="text" placeholder="Game jam theme" name="theme_name"/>
+				<input type="submit" value="Submit"/>
+			</form>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-xs-6">
+				<h4><strong>Theme name</strong></h4>
+			</div>
+			<div class="col-xs-6">
+				<h4><strong>Up/Down vote</a></h4>
+			</div>
+		</div>
+		<hr>
+		{{#if user}}
 		{{#each themes}}
-		<p>{{this.value.name}}</p><br>
+				<div class="row">
+					<div class="col-xs-6">
+						<h4><strong><u>{{this.value.name}}</u></strong></h4>
+					</div>
+					<div class="col-xs-6">
+						{{#if this.canVote}}
+							<h4><strong><a class="text-danger" href="/votes/{{this.id}}"><i class="text-danger fa fa-heart"></i> Upvote</a></h4>
+						{{else}}
+							<h4><strong><a class="text-default" href="/votes/{{this.id}}"><i class="text-default fa fa-thumbs-o-down"></i> Downvote</a></strong></h4>
+						{{/if}}
+					</div>
+				</div>
 		{{/each}}
-
-
+		{{else}}
+		{{#each themes}}
+				<div class="row">
+					<div class="col-xs-6">
+						<h4><strong><u>{{this.value.name}}</u></strong></h4>
+					</div>
+					<div class="col-xs-6">
+							<h4><strong><a href="/login">Sign in to vote!</a></strong></h4>
+					</div>
+				</div>
+		{{/each}}
+		{{/if}}
 	</div>
 	</div>
 
