@@ -1,6 +1,6 @@
 "use strict";
 
-const adminPermission = 1341520961;
+const adminPermission = 1341521089;
 
 module.exports = {
 	sortbyVotes: (themes) => {

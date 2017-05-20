@@ -26,6 +26,8 @@ routes.post("/themes", vote.themes);
 routes.get("/votes/:id", vote.upvote);
 
 routes.get("/admin", admin.index);
+routes.get("/admin/votes", admin.votes);
+routes.get("/votes/remove/:id", admin.removeTheme);
 
 // for passport
 routes.get("/login", account.login);
