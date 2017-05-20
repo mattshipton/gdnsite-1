@@ -5,6 +5,7 @@ const config = require("./config.json");
 const koa = require("koa");
 const hbs = require("koa-hbs");
 const serve = require("koa-static-folder");
+const helmet = require("koa-helmet");
 
 // for passport support
 const session = require("koa-generic-session");
@@ -16,6 +17,7 @@ const db = require("./helpers/db");
 const errModel = require("./models/error");
 
 const app = koa();
+app.use(helmet());
 
 exports.app = app;
 exports.passport = passport;
