@@ -17,7 +17,6 @@ const db = require("./helpers/db");
 const errModel = require("./models/error");
 
 const app = koa();
-app.use(helmet());
 
 exports.app = app;
 exports.passport = passport;
@@ -41,6 +40,8 @@ if (process.env.NODE_ENV === "production") {
 } else {
 	app.use(session());
 }
+
+app.use(helmet());
 
 // body parser
 app.use(bodyParser());

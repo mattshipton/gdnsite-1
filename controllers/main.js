@@ -4,6 +4,10 @@ const config = require("../config.json");
 const db = require("../helpers/db");
 const common = require("../helpers/common");
 
+/**
+* GET '/'
+* @returns {view} index.hbs - Returns user to the homepage
+*/
 module.exports.index = function* index() {
 	let user = null;
 	if (this.isAuthenticated()) {
@@ -15,6 +19,10 @@ module.exports.index = function* index() {
 	});
 };
 
+/**
+* GET '/success'
+* @returns {view} success.hbs - Returns user to the success page
+*/
 module.exports.success = function* success() {
 	let user = null;
 	if (this.isAuthenticated()) {
@@ -26,28 +34,27 @@ module.exports.success = function* success() {
 	});
 };
 
-module.exports.voted = function* voted() {
-	let user = null;
-	if (this.isAuthenticated()) {
-		user = common.getPermissions(this.session.passport.user);
-	}
-	yield this.render("voted", {
-		title: config.site.name,
-		user: user
-	});
-};
-
+/**
+* GET '/join'
+* @returns {link} gdn discord
+*/
 module.exports.join = function join() {
 	this.redirect("https://discord.gg/sWsrrJQ");
 };
 
-module.exports.jam = function* jam() {
+/**
+* GET '/'
+* @returns {link} icth.io gamejam page
+*/
+module.exports.jam = function jam() {
 	let user = null;
 	if (this.isAuthenticated()) {
 		user = common.getPermissions(this.session.passport.user);
 	}
 	this.redirect("https://itch.io/jam/game-dev-network-blueberry-jam");
 };
+
+// Not really implemented yet
 
 module.exports.gamejam = function* gamejam() {
 	let user = null;
@@ -57,27 +64,5 @@ module.exports.gamejam = function* gamejam() {
 	yield this.render("gamejam", {
 		title: config.site.name,
 		user: user
-	});
-};
-
-module.exports.vote = function* vote() {
-	let user = null;
-	const data = yield db.runView("themes/all", null, "themes");
-	let returnData = [];
-	if (this.isAuthenticated()) {
-		user = common.getPermissions(this.session.passport.user);
-		for (const item of data.results) {
-			if (item.value.voters.indexOf(`${user.username}#${user.discriminator}`) === -1) {
-				item.canVote = true;
-			}
-			returnData.push(item);
-		}
-	} else {
-		returnData = data.results;
-	}
-	yield this.render("vote", {
-		title: config.site.name,
-		user: user,
-		themes: returnData
 	});
 };

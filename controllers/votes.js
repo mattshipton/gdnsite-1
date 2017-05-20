@@ -3,7 +3,38 @@
 const db = require("../helpers/db");
 const themeModel = require("../models/theme");
 
-module.exports.upvote = function* upvote() {
+/**
+* GET '/vote'
+* @returns {view} vote.hbs - Gives a view with all the themes to vote for
+*/
+module.exports.votePage = function* votePage() {
+	let user = null;
+	const data = yield db.runView("themes/all", null, "themes");
+	let returnData = [];
+	if (this.isAuthenticated()) {
+		user = common.getPermissions(this.session.passport.user);
+		for (const item of data.results) {
+			if (item.value.voters.indexOf(`${user.username}#${user.discriminator}`) === -1) {
+				item.canVote = true;
+			}
+			returnData.push(item);
+		}
+	} else {
+		returnData = data.results;
+	}
+	yield this.render("vote", {
+		title: config.site.name,
+		user: user,
+		themes: returnData
+	});
+};
+
+/**
+* GET '/votes/:id'
+* @param {string} id - id of the theme to apply vote to
+* @returns {view} vote.hbs - Returns user back to the vote page with updated vote info
+*/
+module.exports.applyVote = function* applyVote() {
 	let user = null;
 	if (this.params.id === null) {
 		throw new Error("Missing parameters!");
@@ -27,6 +58,11 @@ module.exports.upvote = function* upvote() {
 	return this.redirect("/vote");
 };
 
+/**
+* GET '/votes/:id'
+* @param {string} name - name of the new theme
+* @returns {view} success.hbs - Returns user to a view to tell them they are successful
+*/
 module.exports.themes = function* themes() {
 	const params = this.request.body;
 	if (this.isUnauthenticated()) {

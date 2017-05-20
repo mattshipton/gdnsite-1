@@ -2,6 +2,10 @@
 const db = require("../helpers/db");
 const common = require("../helpers/common");
 
+/**
+* GET '/admin'
+* @returns {view} admin/index.hbs - Returns user to the admin page
+*/
 module.exports.index = function* index() {
 	let user = null;
 	if (this.isUnauthenticated()) {
@@ -19,6 +23,10 @@ module.exports.index = function* index() {
 	}
 };
 
+/**
+* GET '/admin/votes'
+* @returns {view} admin/vote.hbs - Returns user to the admin vote page
+*/
 module.exports.votes = function* votes() {
 	let user = null;
 	if (this.isUnauthenticated()) {
@@ -39,6 +47,11 @@ module.exports.votes = function* votes() {
 	}
 };
 
+/**
+* GET '/votes/remove/:id'
+* @param {string} id - the id of the theme to delete
+* @returns {view} admin/votes.hbs - Returns user to the admin vote page
+*/
 module.exports.removeTheme = function* removeTheme() {
 	let user = null;
 	if (this.isUnauthenticated()) {
