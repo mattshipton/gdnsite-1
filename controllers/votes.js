@@ -2,6 +2,7 @@
 
 const db = require("../helpers/db");
 const themeModel = require("../models/theme");
+const config = require("../config.json");
 
 /**
 * GET '/vote'
