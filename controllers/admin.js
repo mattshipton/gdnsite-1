@@ -10,13 +10,13 @@ module.exports.index = function* index() {
 	if (this.isAuthenticated()) {
 		user = common.getPermissions(this.session.passport.user);
 	}
-		if (user.admin) {
-			yield this.render("admin/index", {
-				user: user
-			});
-		} else {
-			throw new Error("Forbidden - You do not have sufficient priveldges!");
-		}
+	if (user.admin) {
+		yield this.render("admin/index", {
+			user: user
+		});
+	} else {
+		throw new Error("Forbidden - You do not have sufficient priveldges!");
+	}
 };
 
 module.exports.votes = function* votes() {
@@ -28,13 +28,14 @@ module.exports.votes = function* votes() {
 		user = common.getPermissions(this.session.passport.user);
 	}
 	if (user.admin) {
-		const data = yield db.runView("themes/all", null, "themes");
+		let data = yield db.runView("themes/all", null, "themes");
+		data = common.sortbyVotes(data.results);
 		yield this.render("admin/vote", {
 			user: user,
-			themes: data.results
+			themes: data
 		});
 	} else {
-		throw new Error("Forbidden - You do not have sufficient priveldges!")
+		throw new Error("Forbidden - You do not have sufficient priveldges!");
 	}
 };
 
@@ -56,6 +57,6 @@ module.exports.removeTheme = function* removeTheme() {
 		}
 		this.redirect("/admin/votes");
 	} else {
-		throw new Error("Forbidden - You do not have sufficient priveldges!")
+		throw new Error("Forbidden - You do not have sufficient priveldges!");
 	}
 };
