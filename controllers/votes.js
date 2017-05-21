@@ -1,6 +1,7 @@
 "use strict";
 
 const db = require("../helpers/db");
+const common = require("../helpers/common");
 const themeModel = require("../models/theme");
 
 /**
