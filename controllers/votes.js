@@ -3,6 +3,7 @@
 const db = require("../helpers/db");
 const common = require("../helpers/common");
 const themeModel = require("../models/theme");
+const config = require("../config.json");
 
 /**
 * GET '/vote'
