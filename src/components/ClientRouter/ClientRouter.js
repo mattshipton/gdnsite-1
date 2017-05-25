@@ -1,5 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import Home from '../Home/Home';
+import Vote from '../Vote/Vote';
 
 const ClientRouter = () => {
   return (
@@ -10,4 +12,4 @@ const ClientRouter = () => {
   )
 }
 
-export default Router;
+export default ClientRouter;
