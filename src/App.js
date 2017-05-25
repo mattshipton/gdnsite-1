@@ -9,9 +9,9 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Header />
+          <Header siteName="Game Dev Network"/>
             <ClientRouter />
-          <Footer />
+          <Footer footerText="Copyright Game Dev Network 2017"/>
         </div>
       </Router>
     );
