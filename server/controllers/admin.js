@@ -6,7 +6,7 @@ const common = require("../helpers/common");
 * GET '/admin'
 * @returns {view} admin/index.hbs - Returns user to the admin page
 */
-module.exports.index = function* index() {
+module.exports.index = function index() {
 	let user = null;
 	if (this.isUnauthenticated()) {
 		this.redirect("/login");
@@ -14,12 +14,10 @@ module.exports.index = function* index() {
 	if (this.isAuthenticated()) {
 		user = common.getPermissions(this.session.passport.user);
 	}
-	if (user.admin) {
-		yield this.render("admin/index", {
-			user: user
-		});
-	} else {
+	if (! user.admin) {
 		throw new Error("Forbidden - You do not have sufficient priveldges!");
+	} else {
+		return this.body = user;
 	}
 };
 
@@ -35,15 +33,15 @@ module.exports.votes = function* votes() {
 	if (this.isAuthenticated()) {
 		user = common.getPermissions(this.session.passport.user);
 	}
-	if (user.admin) {
+	if (!user.admin) {
+		throw new Error("Forbidden - You do not have sufficient priveldges!");
+	} else {
 		let data = yield db.runView("themes/all", null, "themes");
 		data = common.sortbyVotes(data.results);
-		yield this.render("admin/vote", {
+		return this.body = {
 			user: user,
 			themes: data
-		});
-	} else {
-		throw new Error("Forbidden - You do not have sufficient priveldges!");
+		};
 	}
 };
 
@@ -60,16 +58,16 @@ module.exports.removeTheme = function* removeTheme() {
 	if (this.isAuthenticated()) {
 		user = common.getPermissions(this.session.passport.user);
 	}
-	if (user.admin) {
-		if (this.params.id === null) {
-			throw new Error("Missing parameters!");
-		}
+	if (this.params.id === null) {
+		throw new Error("Missing parameters!");
+	}
+	if (!user.admin) {
+		throw new Error("Forbidden - You do not have sufficient priveldges!");
+	} else {
 		const document = yield db.removeDocument(this.params.id, "themes");
 		if (document.error === true) {
 			throw new Error(document.message);
 		}
-		this.redirect("/admin/votes");
-	} else {
-		throw new Error("Forbidden - You do not have sufficient priveldges!");
+		return this.body = document;
 	}
 };

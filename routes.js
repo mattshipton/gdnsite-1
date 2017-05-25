@@ -13,35 +13,50 @@ const account = require("./server/controllers/account.js");
 const vote = require("./server/controllers/votes");
 const admin = require("./server/controllers/admin");
 
+function loadHtml() {
+	return new Promise((resolve, reject) => {
+		fs.readFile("./dist/index.html", {
+			"encoding": "utf8"
+		}, (err, data) => {
+			if (err) return reject(err);
+			resolve(data);
+		});
+	});
+};
+
+if (process.env.NODE_ENV === "production") {
+	routes.get(/^\/(.*)(?:\/|$)/, function* next(next) {
+		if (this.request.url.startsWith("/api")) {
+			yield next;
+		} else {
+			this.body = yield loadHtml();
+		}
+	});
+}
+
 // routes
-routes.get("/", main.index);
-routes.get("/join", main.join);
-routes.get("/success", main.success);
-routes.get("/gamejam", main.jam);
-routes.get("/gamejam/:id", main.gamejam);
+routes.get("/api/gamejam/:id", main.gamejam);
 
-routes.get("/vote", vote.votePage);
-routes.post("/themes", vote.themes);
-routes.get("/votes/:id", vote.applyVote);
+routes.get("/api/vote", vote.votePage);
+routes.post("/api/themes", vote.themes);
+routes.get("/api/votes/:id", vote.applyVote);
 
-routes.get("/admin", admin.index);
-routes.get("/admin/votes", admin.votes);
-routes.get("/votes/remove/:id", admin.removeTheme);
+routes.get("/api/admin", admin.index);
+routes.get("/api/admin/votes", admin.votes);
+routes.get("/api/votes/remove/:id", admin.removeTheme);
 
 // for passport
-routes.get("/login", account.login);
-routes.get("/logout", account.logout);
-routes.get("/account", account.index);
+routes.get("/api/logout", account.logout);
 
 // you can add as many strategies as you want
-routes.get("/auth/discord",
+routes.get("/api/auth/discord",
 	passport.authenticate("discord")
 );
 
-routes.get("/auth/discord/callback",
+routes.get("/api/auth/discord/callback",
 	passport.authenticate("discord", {
 		successRedirect: "/",
-		failureRedirect: "/"
+		failureRedirect: "/login"
 	})
 );
 

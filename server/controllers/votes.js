@@ -24,11 +24,10 @@ module.exports.votePage = function* votePage() {
 	} else {
 		returnData = data.results;
 	}
-	yield this.render("vote", {
-		title: config.site.name,
+	return this.body = {
 		user: user,
 		themes: returnData
-	});
+	};
 };
 
 /**
@@ -51,13 +50,11 @@ module.exports.applyVote = function* applyVote() {
 	if (~theme.voters.indexOf(`${user.username}#${user.discriminator}`)) {
 		theme = themeModel.removeVote(theme, `${user.username}#${user.discriminator}`);
 		const result = yield db.saveDocument(theme, "themes");
-		this.body = result;
-		return this.redirect("/vote");
+		return this.body = result;
 	}
 	theme = themeModel.addVote(theme, `${user.username}#${user.discriminator}`);
 	const result = yield db.saveDocument(theme, "themes");
-	this.body = result;
-	return this.redirect("/vote");
+	return this.body = result;
 };
 
 /**
@@ -75,6 +72,5 @@ module.exports.themes = function* themes() {
 	}
 	const theme = themeModel.newTheme(params.theme_name);
 	const result = yield db.saveDocument(theme, "themes");
-	this.body = result;
-	return this.redirect("/success");
+	return this.body = result;
 };
