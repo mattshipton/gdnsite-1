@@ -1,7 +1,7 @@
 "use strict";
 
-const passport = require("../index.js").passport;
-const config = require("../config.json");
+const passport = require("../../index.js").passport;
+const config = require("../../config.json");
 const co = require("co");
 
 passport.serializeUser((user, done) => {

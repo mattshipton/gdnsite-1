@@ -8,10 +8,10 @@ const Router = require("koa-router");
 
 const routes = new Router();
 
-const main = require("./controllers/main.js");
-const account = require("./controllers/account.js");
-const vote = require("./controllers/votes");
-const admin = require("./controllers/admin");
+const main = require("./server/controllers/main.js");
+const account = require("./server/controllers/account.js");
+const vote = require("./server/controllers/votes");
+const admin = require("./server/controllers/admin");
 
 // routes
 routes.get("/", main.index);
