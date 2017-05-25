@@ -1,0 +1,11 @@
+nav.navbar-gdn {
+  background-color: #0080B4;
+}
+
+nav.navbar-nav li a{
+  color: #fff;
+}
+
+nav.navbar-nav li a:hover {
+  background-color: #005B7D;
+}
