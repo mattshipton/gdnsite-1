@@ -2,7 +2,7 @@ import React from 'react';
 import './Header.css';
 import { Link } from 'react-router-dom';
 
-const Header = () => {
+const Header = (props) => {
   return (
     <nav className="navbar navbar-gdn">
       <div className="container-fluid">
