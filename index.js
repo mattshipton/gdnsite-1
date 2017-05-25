@@ -13,8 +13,8 @@ const redis = require("koa-redis");
 const bodyParser = require("koa-bodyparser");
 const passport = require("koa-passport");
 
-const db = require("./helpers/db");
-const errModel = require("./models/error");
+const db = require("./server/helpers/db");
+const errModel = require("./server/models/error");
 
 const app = koa();
 
@@ -22,10 +22,7 @@ exports.app = app;
 exports.passport = passport;
 
 // the auth model for passport support
-require("./models/auth");
-
-// misc handlebars helpers
-require("./helpers/handlebars");
+require("./server/models/auth");
 
 // trust proxy
 app.proxy = true;
@@ -52,15 +49,6 @@ app.use(passport.session());
 
 // statically serve assets
 app.use(serve("./assets"));
-
-// load up the handlebars middlewear
-app.use(hbs.middleware({
-
-	viewPath: `${__dirname}/views`,
-	layoutsPath: `${__dirname}/views/layouts`,
-	partialsPath: `${__dirname}/views/partials`,
-	defaultLayout: "main"
-}));
 
 app.use(function* error(next) {
 	try {

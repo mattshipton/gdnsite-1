@@ -1,5 +1,5 @@
 "use strict";
-const config = require("../config.json");
+const config = require("../../config.json");
 
 const moment = require("moment-timezone");
 const Chance = require("chance");
