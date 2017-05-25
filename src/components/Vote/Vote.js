@@ -39,15 +39,6 @@ class Vote extends Component {
                     <tr>
                       {/* Here we need to map over each jam theme name and print them out in table cells
                         which will allow us to populate the table all at once*/}
-                        {/* Example pseudocode for this:
-                          themes.map(theme => /*{
-                            {/*<td>{/*theme.name*/}</td>*/}
-                          })*/ */}
-
-                          {/* Example above might not work properly out of the box in which case we can define
-                            a function above which will return the cells we need and simply call the function
-                            down here in the table row. Also note that the parentheses above are simply for commenting
-                            purposes as that's how commenting is done in JSX. */}
                     </tr>
                     <tr>
                       {/* Here we need to get the number of votes for each jam theme and provide up/down

@@ -1,8 +1,13 @@
 nav.navbar-gdn {
   background-color: #0080B4;
+  border-radius: 0;
 }
 
-nav.navbar-nav li a{
+a.navbar-brand {
+  color: #fff;
+}
+
+ul.navbar-nav li a{
   color: #fff;
 }
 
