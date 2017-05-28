@@ -32,9 +32,9 @@ class Vote extends Component {
       themeTable = <tr><th>There are no themes :(</th></tr>;
     } else {
       themeTable = this.state.themes.map((t) => {
-      return <div><tr><th>{t.value.name}</th></tr>{
-        t.canVote ? <tr><th><Link className="text-danger" to={`/votes/${t.id}`}><i class="text-danger fa fa-heart"></i> Upvote</Link></th></tr> : <tr><th><Link className="text-default" to={`/votes/${t.id}`}><i class="text-default fa fa-thumbs-o-down"></i> Downvote</Link></th></tr>
-        }</div>
+      return <tr><th>{t.value.name}</th>{
+        t.canVote ? <th><Link className="text-danger" to={`/votes/${t.id}`}><i class="text-danger fa fa-heart"></i> Upvote</Link></th> : <th><Link className="text-default" to={`/votes/${t.id}`}><i class="text-default fa fa-thumbs-o-down"></i> Downvote</Link></th>
+        }</tr>
       })
     }
     return (
