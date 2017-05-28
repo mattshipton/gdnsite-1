@@ -39,7 +39,9 @@
     "react-scripts": "1.0.6"
   },
   "scripts": {
-    "start": "./node_modules/.bin/concurrently --kil-others -p [{name}] -n \"API,RJS\" -c \"bgGreen.bold,bgMagenta.bold\" \"./node_modules/.bin/nodemon -e js index.js\" \"./node_modules/.bin/react-scripts start\"",
+    "start": "./node_modules/.bin/concurrently --kil-others -p [{name}] -n \"API,RJS\" -c \"bgGreen.bold,bgMagenta.bold\" \"npm run watch-server\" \"npm run react\"",
+    "watch-server": "./node_modules/.bin/nodemon -e js index.js",
+    "react": "./node_modules/.bin/react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

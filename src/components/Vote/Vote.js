@@ -3,12 +3,23 @@ import { Link } from 'react-router-dom';
 import './Vote.css';
 
 class Vote extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {themes: []}
+  }
+
   handleChange = () => {
 
   }
 
   handleSubmit = () => {
 
+  }
+
+  componentDidMount() {
+    fetchThemes().then((data) => {
+      this.setState({themes:data});
+    })
   }
 
   render () {
@@ -37,6 +48,7 @@ class Vote extends Component {
                   </thead>
                   <tbody>
                     <tr>
+                      {this.state.themes}
                       {/* Here we need to map over each jam theme name and print them out in table cells
                         which will allow us to populate the table all at once*/}
                     </tr>
@@ -53,6 +65,17 @@ class Vote extends Component {
       </div>
     );
   }
+}
+
+function fetchThemes() {
+  var url = "http://localhost:5000/api/vote";
+  fetch(url).then((response) => {
+    return response.json();
+  }).then((json) => {
+    return json;
+  }).catch((error) => {
+    console.log(error);
+  });
 }
 
 export default Vote;

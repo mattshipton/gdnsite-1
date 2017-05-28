@@ -35,8 +35,6 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // routes
-routes.get("/api/gamejam/:id", main.gamejam);
-
 routes.get("/api/vote", vote.votePage);
 routes.post("/api/themes", vote.themes);
 routes.get("/api/votes/:id", vote.applyVote);
