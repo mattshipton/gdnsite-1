@@ -14,7 +14,7 @@ class Vote extends Component {
 
   handleChange = (e) => {
     this.state.formData = {
-      theme_name: e.target.value
+      theme_name: e.target.value  
     }
   }
 
@@ -41,7 +41,7 @@ class Vote extends Component {
       themeTable = <tr><th>There are no themes :(</th></tr>;
     } else {
       themeTable = this.state.themes.map((t) => {
-      return <tr><th>{t.value.name}</th>{
+      return <tr key={t.id}><th>{t.value.name}</th>{
         t.canVote ? <th><Link className="text-danger" to={`/votes/${t.id}`}><i className="text-danger fa fa-heart"></i> Upvote</Link></th> : <th><Link className="text-default" to={`/votes/${t.id}`}><i className="text-default fa fa-thumbs-o-down"></i> Downvote</Link></th>
         }</tr>
       })
