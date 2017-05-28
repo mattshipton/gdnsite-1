@@ -6,19 +6,21 @@ class Vote extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      formData: null, 
-      user: null, 
+      formData: null,
+      user: null,
       themes: []
     }
   }
 
   handleChange = (e) => {
-    this.state.formData = {
-      theme_name: e.target.value  
-    }
+    this.setState({
+      theme_name: e.target.value
+    });
   }
 
-  handleSubmit = () => {
+  handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(this.state);
     var request = new XMLHttpRequest();
     request.open("POST", "http://localhost:5000/api/themes", true);
     request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
