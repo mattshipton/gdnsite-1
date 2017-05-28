@@ -5,15 +5,24 @@ import './Vote.css';
 class Vote extends Component {
   constructor(props) {
     super(props);
-    this.state = {user: null, themes: []}
+    this.state = {
+      formData: null, 
+      user: null, 
+      themes: []
+    }
   }
 
-  handleChange = () => {
-
+  handleChange = (e) => {
+    this.state.formData = {
+      theme_name: e.target.value
+    }
   }
 
   handleSubmit = () => {
-
+    var request = new XMLHttpRequest();
+    request.open("POST", "http://localhost:5000/api/themes", true);
+    request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+    request.send(JSON.stringify(this.state.formData));
   }
 
   componentWillMount = () => {
@@ -49,7 +58,7 @@ class Vote extends Component {
               <form onSubmit={this.handleSubmit} className="form-inline">
                 <div className="form-group">
                   <input type="text" className="form-control" onChange={this.handleChange} />
-                  <button className="btn btn-default">Submit</button>
+                  <button className="btn btn-default" onSubmit={this.handleSubmit}>Submit</button>
                 </div>
               </form>
               <div className="table-responsive">

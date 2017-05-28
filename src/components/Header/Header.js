@@ -18,8 +18,8 @@ const Header = (props) => {
 
         <div className="collapse navbar-collapse" id="gdn-navbar">
           <ul className="nav navbar-nav">
-            <li className="active"><Link to="/join">Join</Link></li>
-            <li><Link to="/gamejam">Game Jam</Link></li>
+            <li className="active"><Link to="https://discord.gg/sWsrrJQ" target="_blank">Join</Link></li>
+            <li><Link to="https://itch.io/jam/game-dev-network-blueberry-jam" target="_blank">Game Jam</Link></li>
             <li><Link to="/vote">Vote for game jam themes</Link></li>
 
           </ul>
