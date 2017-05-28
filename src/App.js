@@ -11,7 +11,7 @@ class App extends Component {
         <div>
           <Header siteName="Game Dev Network"/>
             <ClientRouter />
-          <Footer footerText="Copyright Game Dev Network 2017"/>
+          <Footer footerContent="Copyright Game Dev Network 2017"/>
         </div>
       </Router>
     );
