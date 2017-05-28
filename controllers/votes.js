@@ -68,7 +68,7 @@ module.exports.applyVote = function* applyVote() {
 module.exports.themes = function* themes() {
 	const params = this.request.body;
 	if (this.isUnauthenticated()) {
-		this.redirect("/login");
+		return this.redirect("/login");
 	}
 	if (!params.theme_name) {
 		throw new Error("You must supply a theme name!");
