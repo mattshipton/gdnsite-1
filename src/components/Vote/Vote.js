@@ -16,7 +16,7 @@ class Vote extends Component {
 
   }
 
-  componentWillMount() {
+  componentWillMount = () => {
     fetch("http://localhost:5000/api/vote").then(response => response.json())
       .then((json) => {
         this.setState({
@@ -27,6 +27,16 @@ class Vote extends Component {
   }
 
   render () {
+    let themeTable = null;
+    if (this.state.themes === undefined || this.state.themes.length === 0) {
+      themeTable = <tr><th>There are no themes :(</th></tr>;
+    } else {
+      themeTable = this.state.themes.map((t) => {
+      return <div><tr><th>{t.value.name}</th></tr>{
+        t.canVote ? <tr><th><a className="text-danger" href="/votes/{t.id}"><i class="text-danger fa fa-heart"></i> Upvote</a></th></tr> : <tr><th><a class="text-default" href="/votes/{t.id}"><i class="text-default fa fa-thumbs-o-down"></i> Downvote</a></th></tr>
+        }</div>
+      })
+    }
     return (
       <div className="container">
         <div className="row">
@@ -50,17 +60,9 @@ class Vote extends Component {
                       <th>Up/Down Vote</th>
                     </tr>
                   </thead>
-                  <tbody>
-                      {
-                        this.state.themes.map((t) => {
-                          return <tr key={t.id}><th>{t.value.name}</th></tr>
-                        })
-                        }
-                    <tr>
-                      {/* Here we need to get the number of votes for each jam theme and provide up/down
-                        vote buttons for users to vote on the theme that they want for the game jam */}
-                    </tr>
-                  </tbody>
+                    <tbody>
+                      { themeTable }
+                    </tbody>
                 </table>
               </div>
             </div>
