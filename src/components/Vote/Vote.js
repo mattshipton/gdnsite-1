@@ -5,7 +5,7 @@ import './Vote.css';
 class Vote extends Component {
   constructor(props) {
     super(props);
-    this.state = {themes: []}
+    this.state = {user: null, themes: []}
   }
 
   handleChange = () => {
@@ -16,10 +16,14 @@ class Vote extends Component {
 
   }
 
-  componentDidMount() {
-    fetchThemes().then((data) => {
-      this.setState({themes:data});
-    })
+  componentWillMount() {
+    fetch("http://localhost:5000/api/vote").then(response => response.json())
+      .then((json) => {
+        this.setState({
+          user: json.user,
+          themes: json.themes
+        });
+      });
   }
 
   render () {
@@ -47,11 +51,11 @@ class Vote extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      {this.state.themes}
-                      {/* Here we need to map over each jam theme name and print them out in table cells
-                        which will allow us to populate the table all at once*/}
-                    </tr>
+                      {
+                        this.state.themes.map((t) => {
+                          return <tr key={t.id}><th>{t.value.name}</th></tr>
+                        })
+                        }
                     <tr>
                       {/* Here we need to get the number of votes for each jam theme and provide up/down
                         vote buttons for users to vote on the theme that they want for the game jam */}
@@ -65,17 +69,6 @@ class Vote extends Component {
       </div>
     );
   }
-}
-
-function fetchThemes() {
-  var url = "http://localhost:5000/api/vote";
-  fetch(url).then((response) => {
-    return response.json();
-  }).then((json) => {
-    return json;
-  }).catch((error) => {
-    console.log(error);
-  });
 }
 
 export default Vote;

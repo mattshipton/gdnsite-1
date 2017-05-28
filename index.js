@@ -6,6 +6,7 @@ const koa = require("koa");
 const hbs = require("koa-hbs");
 const serve = require("koa-static-folder");
 const helmet = require("koa-helmet");
+const cors = require("koa-cors");
 
 // for passport support
 const session = require("koa-generic-session");
@@ -17,6 +18,7 @@ const db = require("./server/helpers/db");
 const errModel = require("./server/models/error");
 
 const app = koa();
+app.use(cors());
 
 exports.app = app;
 exports.passport = passport;
