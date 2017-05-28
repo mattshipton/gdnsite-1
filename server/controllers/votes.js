@@ -44,7 +44,7 @@ module.exports.applyVote = function* applyVote() {
 		user = this.session.passport.user;
 	}
 	if (this.isUnauthenticated()) {
-		this.redirect("/login");
+		return this.redirect("/login");
 	}
 	let theme = yield db.getDocument(this.params.id, "themes");
 	if (~theme.voters.indexOf(`${user.username}#${user.discriminator}`)) {
