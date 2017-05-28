@@ -16,9 +16,6 @@ class Vote extends Component {
     this.setState({
       theme_name: e.target.value
     });
-    // this.state.formData = {
-    //   theme_name: e.target.value
-    // }
   }
 
   handleSubmit = (e) => {
