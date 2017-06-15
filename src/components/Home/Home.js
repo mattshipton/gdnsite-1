@@ -26,8 +26,8 @@ const Home = () => {
         </section>
       </div>
       <div className="row">
+        <hr />
         <section className="q-boxes">
-          <hr />
           <div className="col-md-4">
             <h4>What will we do?</h4>
             <p>After the Game Jam themes are announced, the brainstorming begins, languages and frameworks are chosen, and the teams
