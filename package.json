@@ -43,7 +43,7 @@
     "koa-router": "^5.3.0",
     "koa-static-folder": "^0.1.6",
     "moment": "^2.18.1",
-    "moment-timezone": "^0.5.11",
+    "moment-timezone": "^0.5.35",
     "passport-discord": "^0.1.2"
   },
   "devDependencies": {
